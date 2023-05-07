@@ -1,4 +1,4 @@
-const staticCacheName = 'site-static-v2';
+const staticCacheName = 'site-static-vGit';
 const assets = ["/", "/index.html", "/addWorkout.html", "/doWorkout.html", "/script.js", "/style.css", "/assets/icon.png", "manifest.json"]
 
 // install event
