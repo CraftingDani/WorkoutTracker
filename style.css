@@ -1,0 +1,170 @@
+*
+{
+    box-sizing: border-box;
+    font-family: Roboto;
+    color: inherit;
+}
+
+:root
+{
+    --backgroundColor: #111;
+    --backgroundLightColor: #222;
+    --accentColor: #00BBFF;
+    --lSpace: 50px;
+    --sSpace: 10px;
+}
+
+body
+{
+    background: var(--backgroundColor);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+}
+
+main
+{
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 300px;
+    gap: var(--lSpace);
+}
+
+.workouts
+{
+    display: flex;
+    flex-direction: column;
+    gap: var(--sSpace);
+    margin-inline: auto;
+    margin-top: var(--lSpace);
+    align-items: center;
+    overflow: auto;
+}
+
+.listItem
+{
+    background-color: var(--backgroundLightColor);
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr var(--lSpace);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #090909;
+    width: 300px;
+}
+
+a
+{
+    display: block;
+    text-decoration: none;
+}
+
+button, a
+{
+    border: none;
+    padding: 0;
+    background-color: var(--backgroundLightColor);
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button.remove, a.add, button.add
+{
+    font-size: 1.3rem;
+}
+
+section.history
+{
+    margin-bottom: var(--lSpace);
+}
+
+section.newWorkout
+{
+    margin-top: var(--lSpace);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sSpace);
+}
+
+a.history
+{
+    font-size: 1rem;
+    display: block;
+}
+
+.addExercice
+{
+    display: grid;
+    align-items: center;
+    gap: var(--sSpace);
+    grid-template-columns: 45px 1fr;
+}
+
+input
+{
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 2px var(--accentColor);
+    outline: none;
+    font-size: 1rem;
+    display: block;
+}
+
+#name
+{
+    margin-bottom: calc(var(--lSpace) - var(--sSpace));
+}
+
+section.done
+{
+    margin-bottom: var(--lSpace);
+    font-size: 1rem;
+}
+
+section.finish
+{
+    margin-bottom: var(--lSpace);
+}
+
+.exercices
+{
+    margin-top: var(--lSpace);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sSpace);
+
+}
+
+.exercices .listItem
+{
+    grid-template-columns: var(--lSpace) 1fr var(--lSpace);
+}
+
+#check
+{
+    margin-inline: auto;
+}
+
+.checked
+{
+    color: #888;
+    background-color: #171717;
+}
+
+.exercices input#reps
+{
+    margin-right: var(--sSpace);
+    border: none;
+    background-color: var(--backgroundColor);
+    margin-block: 10px;
+    padding: 5px;
+    border-radius: var(--sSpace);
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Workout Tracker",
+    "short_name": "WorkoutTracker",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#0F0",
+    "description": "Track your workouts and exercices",
+    "theme_color": "#0bf",
+    "lang": "en",
+    "icons":
+    [{
+        "src": "./assets/icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+    }]
+}
