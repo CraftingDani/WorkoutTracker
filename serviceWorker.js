@@ -1,5 +1,6 @@
 const staticCacheName = 'site-static-vGit';
-const assets = ["/", "/index.html", "/addWorkout.html", "/doWorkout.html", "/script.js", "/style.css", "/assets/icon.png", "manifest.json"]
+const urlPrefix = "/WorkoutTracker"
+const assets = [urlPrefix + "/", urlPrefix + "/index.html", urlPrefix + "/addWorkout.html", urlPrefix + "/doWorkout.html", urlPrefix + "/script.js", urlPrefix + "/style.css", urlPrefix + "/assets/icon.png", urlPrefix + "manifest.json"]
 
 // install event
 self.addEventListener('install', evt => {

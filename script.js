@@ -1,6 +1,7 @@
 const q = document.querySelector
 const $$ = document.querySelectorAll
 let newExercices = []
+const urlPrefix = "/WorkoutTracker"
 
 
 
@@ -117,7 +118,7 @@ function addWorkout(e)
     console.log(JSON.parse(localStorage.getItem("crd.workouts")))
 
     newExercices = []
-    window.location.href = "/"
+    window.location.href = urlPrefix + "/"
 }
 
 
@@ -138,14 +139,14 @@ registerSW()
 
 switch(window.location.pathname)
 {
-    case "/":
-    case "/index.html":
+    case urlPrefix + "/":
+    case urlPrefix + "/index.html":
         runIndexPage()
         break
-    case "/addWorkout.html":
+    case urlPrefix + "/addWorkout.html":
         runAddWorkoutPage()
         break
-    case "/doWorkout.html":
+    case urlPrefix + "/doWorkout.html":
         runDoWorkoutPage()
         break
 }
