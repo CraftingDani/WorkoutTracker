@@ -1,4 +1,4 @@
-const staticCacheName = 'site-static-vGit';
+const staticCacheName = 'site-static-vGit2';
 const urlPrefix = "/WorkoutTracker"
 const assets = [urlPrefix + "/", urlPrefix + "/index.html", urlPrefix + "/addWorkout.html", urlPrefix + "/doWorkout.html", urlPrefix + "/script.js", urlPrefix + "/style.css", urlPrefix + "/assets/icon.png", urlPrefix + "manifest.json"]
 
