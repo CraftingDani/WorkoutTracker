@@ -7,26 +7,7 @@ const urlPrefix = "/WorkoutTracker"
 
 function runIndexPage()
 {
-    let workouts = JSON.parse(localStorage.getItem("crd.workouts"))
-    if(workouts == undefined) workouts = []
-
-    const workoutContainer = document.querySelector("[data-workoutContainer]")
-
-    if(workouts.length == 0)
-    {
-        const p = document.createElement("p")
-        p.innerText = "There are no workouts yet..."
-        workoutContainer.insertBefore(p, workoutContainer.firstChild)
-        return
-    }
-
-    workouts.forEach(i =>
-    {
-        const workout = document.querySelector("[data-workoutTemplate]").content.cloneNode(true)
-        workout.querySelector("a").innerText = i.name
-        workout.querySelector("a").href += "?workout=" + i.name
-        workoutContainer.insertBefore(workout, workoutContainer.firstChild)
-    })
+    updateIndexWorkouts()
 }
 
 
@@ -41,7 +22,7 @@ function runDoWorkoutPage()
 {
     document.querySelector("[data-finishWorkout]").addEventListener("click", finishWorkout)
 
-    const workoutName = window.location.search.split("=")[1]
+    const workoutName = window.location.search.split("=").splice(-1).toString()
     const workouts = JSON.parse(localStorage.getItem("crd.workouts"))
 
     workouts.forEach(i =>
@@ -85,15 +66,17 @@ async function registerSW() // service worker
 
 function addExercice(e)
 {
-    const exercice = document.querySelector("#exercice").value
-    if(exercice == "") return
+    const exerciceName = document.querySelector("#exercice").value
+    if(exerciceName == "") return
+    if(newExercices.includes(exerciceName)) return
 
-    newExercices.push(exercice)
+    newExercices.push(exerciceName)
 
     const exerciceContainer = document.querySelector("[data-exerciceContainer]")
 
     const exerciceElement = document.querySelector("[data-exerciceTemplate]").content.cloneNode(true)
-    exerciceElement.querySelector("p").innerText = exercice
+    exerciceElement.querySelector("p").innerText = exerciceName
+    exerciceElement.querySelector("button.remove").addEventListener("click", removeExercice)
     exerciceContainer.insertBefore(exerciceElement, document.querySelector("[data-exerciceInput]"))
 
     document.querySelector("#exercice").value = ""
@@ -124,13 +107,76 @@ function addWorkout(e)
 
 function finishWorkout(e)
 {
-    
+    let returning = false // return unless all checked
+    document.querySelectorAll(".listItem").forEach(i =>
+    {
+        if(!i.classList.contains("checked")) returning = true
+    })
+    if(returning) return
+
+
+    window.location.href = urlPrefix + "/"
+    //add to history
 }
 
 
 function checkBox(e)
 {
     e.target.parentElement.classList.toggle("checked")
+}
+
+
+function removeWorkout(e)
+{
+    const workoutName = e.target.parentElement.querySelector("a").href.split("?workout=").slice(-1).toString()
+    let workouts = JSON.parse(localStorage.getItem("crd.workouts"))
+    workouts = workouts.filter(obj => obj.name !== workoutName) //remove the deleted workout from array (localStorage)
+
+    localStorage.setItem("crd.workouts", JSON.stringify(workouts))
+
+    e.target.parentElement.remove()
+    updateIndexWorkouts()
+}
+
+
+function removeExercice(e)
+{
+    const exerciceName = e.target.parentElement.querySelector("p").innerText
+    console.log(exerciceName)
+
+    newExercices = newExercices.filter(obj => obj !== exerciceName) //remove the deleted exercice from array
+    
+    e.target.parentElement.remove()
+}
+
+
+function updateIndexWorkouts()
+{
+    let workouts = JSON.parse(localStorage.getItem("crd.workouts"))
+    if(workouts == undefined) workouts = []
+    
+    const workoutContainer = document.querySelector("[data-workoutContainer]")
+
+    if(workouts.length == 0)
+    {
+        const p = document.createElement("p")
+        p.innerText = "There are no workouts yet..."
+        workoutContainer.insertBefore(p, workoutContainer.firstChild)
+        return
+    }
+
+    workouts.forEach(i =>
+    {
+        const workout = document.querySelector("[data-workoutTemplate]").content.cloneNode(true)
+        workout.querySelector("a").innerText = i.name
+        workout.querySelector("a").href += "?workout=" + i.name
+        workoutContainer.insertBefore(workout, workoutContainer.firstChild)
+    })
+
+    document.querySelectorAll("[data-removeWorkout]").forEach(i =>
+    {
+        i.addEventListener("click", removeWorkout)
+    })
 }
 
 
