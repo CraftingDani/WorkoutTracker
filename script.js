@@ -204,4 +204,4 @@ switch(window.location.pathname)
 // TODO
 // keybord usability (enter etc)
 // history
-// delete items
+
